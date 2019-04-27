@@ -7,18 +7,18 @@
   
   <title>Paxos论文阅读 | live  Bold,  not  Bored</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文是我拜读了Lamport爷的牛文章《Paxos Made Simple》后写一点理解 + 读后感 Paxos是一种对经典共识问题的算法，讲的就是在一个分布式系统中，几个节点如何就一个值达成一致。因为分布式系统中，节点失效、宕机重启的情况时有发生。针对一个值如何达成一致确实是个不简单的问题。 首先讲一下Paxos的适用条件，Paxos适用于无“拜占庭将军问题”情况的系统，也就是说，它必须最终针对">
+  <meta name="description" content="本文是我拜读了Lamport爷的牛文章《Paxos Made Simple》后写一点理解 + 读后感 Paxos是一种对经典共识问题的算法，讲的就是在一个分布式系统中，几个节点如何在各种情况下，就一个变量的取值达成一致。因为分布式系统中，节点失效、宕机重启的情况时有发生。针对一个值如何达成一致确实是个不简单的问题。 首先讲一下Paxos的适用条件，Paxos适用于无“拜占庭将军问题”情况的系统，也">
 <meta name="keywords" content="Paxos">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Paxos论文阅读">
 <meta property="og:url" content="http://ShuaiWang0410.github.io/2018/08/30/Paxos论文解析/index.html">
 <meta property="og:site_name" content="live  Bold,  not  Bored">
-<meta property="og:description" content="本文是我拜读了Lamport爷的牛文章《Paxos Made Simple》后写一点理解 + 读后感 Paxos是一种对经典共识问题的算法，讲的就是在一个分布式系统中，几个节点如何就一个值达成一致。因为分布式系统中，节点失效、宕机重启的情况时有发生。针对一个值如何达成一致确实是个不简单的问题。 首先讲一下Paxos的适用条件，Paxos适用于无“拜占庭将军问题”情况的系统，也就是说，它必须最终针对">
+<meta property="og:description" content="本文是我拜读了Lamport爷的牛文章《Paxos Made Simple》后写一点理解 + 读后感 Paxos是一种对经典共识问题的算法，讲的就是在一个分布式系统中，几个节点如何在各种情况下，就一个变量的取值达成一致。因为分布式系统中，节点失效、宕机重启的情况时有发生。针对一个值如何达成一致确实是个不简单的问题。 首先讲一下Paxos的适用条件，Paxos适用于无“拜占庭将军问题”情况的系统，也">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-01T16:13:42.054Z">
+<meta property="og:updated_time" content="2019-01-10T21:40:53.535Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Paxos论文阅读">
-<meta name="twitter:description" content="本文是我拜读了Lamport爷的牛文章《Paxos Made Simple》后写一点理解 + 读后感 Paxos是一种对经典共识问题的算法，讲的就是在一个分布式系统中，几个节点如何就一个值达成一致。因为分布式系统中，节点失效、宕机重启的情况时有发生。针对一个值如何达成一致确实是个不简单的问题。 首先讲一下Paxos的适用条件，Paxos适用于无“拜占庭将军问题”情况的系统，也就是说，它必须最终针对">
+<meta name="twitter:description" content="本文是我拜读了Lamport爷的牛文章《Paxos Made Simple》后写一点理解 + 读后感 Paxos是一种对经典共识问题的算法，讲的就是在一个分布式系统中，几个节点如何在各种情况下，就一个变量的取值达成一致。因为分布式系统中，节点失效、宕机重启的情况时有发生。针对一个值如何达成一致确实是个不简单的问题。 首先讲一下Paxos的适用条件，Paxos适用于无“拜占庭将军问题”情况的系统，也">
   
     <link rel="alternate" href="/atom.xml" title="live  Bold,  not  Bored" type="application/atom+xml">
   
@@ -68,7 +68,7 @@
         <section id="main"><article id="post-Paxos论文解析" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/08/30/Paxos论文解析/" class="article-date">
-  <time datetime="2018-08-30T19:43:39.000Z" itemprop="datePublished">2018-08-30</time>
+  <time datetime="2018-08-30T22:43:39.000Z" itemprop="datePublished">2018-08-30</time>
 </a>
     
   </div>
@@ -88,7 +88,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>本文是我拜读了Lamport爷的牛文章《Paxos Made Simple》后写一点理解 + 读后感</p>
-<p>Paxos是一种对经典共识问题的算法，讲的就是在一个分布式系统中，几个节点如何就一个值达成一致。因为分布式系统中，节点失效、宕机重启的情况时有发生。针对一个值如何达成一致确实是个不简单的问题。</p>
+<p>Paxos是一种对经典共识问题的算法，讲的就是在一个分布式系统中，几个节点如何在各种情况下，就一个变量的取值达成一致。因为分布式系统中，节点失效、宕机重启的情况时有发生。针对一个值如何达成一致确实是个不简单的问题。</p>
 <p>首先讲一下Paxos的适用条件，Paxos适用于无“拜占庭将军问题”情况的系统，也就是说，它必须最终针对至少一个值达成至少一次共识</p>
 <p>Paxos在Safety和Liveliness方面的目的:</p>
 <p>Safety方面：</p>
@@ -192,7 +192,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2018 Shuai Wang<br>
+      &copy; 2019 Shuai Wang<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
